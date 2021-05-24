@@ -1,0 +1,31 @@
+version: "3"
+services:
+  client-app:
+    image: book-client
+    stdin_open: true
+    ports: 
+      - "3000:3000"
+    networks:
+      - graphql-book-app
+  server-app:
+    image: book-server
+    ports:
+      - "4000:4000"
+    networks:
+      - graphql-book-app
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:3.6.19-xenial
+    ports:
+      - "27017:27017"
+    networks:
+      - graphql-book-app
+    volumes:
+      - mongo-data:/data/db
+networks:
+  graphql-book-app:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
