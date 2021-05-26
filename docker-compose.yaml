@@ -1,21 +1,21 @@
 version: "3"
 services:
-  client-app:
-    image: book-client
+  book-client-app:
+    image: book-client-app
     stdin_open: true
     ports: 
       - "3000:3000"
     networks:
       - graphql-book-app
-  server-app:
-    image: book-server
+  book-server-app:
+    image: book-server-app
     ports:
       - "4000:4000"
     networks:
       - graphql-book-app
     depends_on:
-      - mongo
-  mongo:
+      - book-mongo
+  book-mongo:
     image: mongo:3.6.19-xenial
     ports:
       - "27017:27017"
